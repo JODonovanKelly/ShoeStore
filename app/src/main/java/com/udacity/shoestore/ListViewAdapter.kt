@@ -35,6 +35,7 @@ class ListViewAdapter(var context: Context, var shoe: ArrayList<Shoe>): BaseAdap
         }
     }
 
+    //replace binding instead of view by id
     override fun getView(position: Int, convertView: View?, parent: ViewGroup?): View {
         var view: View?
         var viewHolder: ViewHolder

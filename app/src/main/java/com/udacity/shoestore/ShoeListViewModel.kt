@@ -1,28 +1,27 @@
+
 package com.udacity.shoestore
 
-import android.os.Bundle
-import android.widget.ListView
-import androidx.appcompat.app.AppCompatActivity
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
 import com.udacity.shoestore.models.Shoe
 
-class ShoeListViewModel : AppCompatActivity(){
+class ShoeListViewModel : ViewModel() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.shoe_item)
+    private val _shoes = MutableLiveData<List<Shoe>>()
+    val shoes: LiveData<List<Shoe>>
+        get() = _shoes
 
-        val listView = findViewById<ListView>(R.id.shoelistview)
-        val arrShoe: ArrayList<Shoe> = ArrayList()
-        arrShoe.add(Shoe("Gel Duramo", 10.5, "Asics", "Gud Business"))
-        arrShoe.add(Shoe("Gel Duram", 8.0, "Asics", "Gud Business"))
-        arrShoe.add(Shoe("Gel Dura", 9.0, "Asics", "Gud Business"))
-        arrShoe.add(Shoe("Gel Dur", 8.5, "Asics", "Gud Business"))
-        arrShoe.add(Shoe("Gel Du", 10.0, "Asics", "Gud Business"))
-        arrShoe.add(Shoe("Gel D", 9.5, "Asics", "Gud Business"))
-        arrShoe.add(Shoe("Gel", 11.5, "Asics", "Gud Business"))
-        arrShoe.add(Shoe("Ge", 10.5, "Asics", "Gud Business"))
-        arrShoe.add(Shoe("G", 11.0, "Asics", "Gud Business"))
+    init {
+        initialShoeList()
+        //_shoes.value
+    }
 
-        listView.adapter = ListViewAdapter(applicationContext, arrShoe)
+    private fun initialShoeList() {
+        val pair1 = Shoe("Gel Venture 11", 10.5, "ASICS", "Gud Business")
+        val pair2 = Shoe("Duramo 10", 10.0, "Adidas", "Gud Bisnes")
+
+        _shoes.postValue(mutableListOf(pair1, pair2))
     }
 }
